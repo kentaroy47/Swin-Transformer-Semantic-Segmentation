@@ -453,10 +453,10 @@ class CustomDataset(Dataset):
             f'{len(results)} != {len(self)}')
 
         if imgfile_prefix is None:
-            tmp_dir = tempfile.TemporaryDirectory()
-            imgfile_prefix = tmp_dir.name
+            tmp_dir = "tmp"
+            imgfile_prefix = tmp_dir
         else:
-            tmp_dir = None
+            tmp_dir = "tmp"
         result_files = self.results2img(results, imgfile_prefix, to_label_id)
 
         return result_files, tmp_dir
