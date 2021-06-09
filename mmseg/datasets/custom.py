@@ -182,6 +182,7 @@ class CustomDataset(Dataset):
             semantic segmentation images.
         """
         mmcv.mkdir_or_exist(imgfile_prefix)
+        to_label_id = True
         result_files = []
         prog_bar = mmcv.ProgressBar(len(self))
         for idx in range(len(self)):
@@ -197,7 +198,7 @@ class CustomDataset(Dataset):
             import cityscapesscripts.helpers.labels as CSLabels
             palette = np.zeros((len(CSLabels.id2label), 3), dtype=np.uint8)
             for label_id, label in CSLabels.id2label.items():
-                palette[label_id] = label.color
+                palette[label_id] = label_id
 
             output.putpalette(palette)
             output.save(png_filename)
